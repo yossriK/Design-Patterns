@@ -1,0 +1,37 @@
+i followed this tutorial https://www.youtube.com/watch?v=yozD5Tnd8nw&list=PLLWMQd6PeGY3ob0Ga6vn1czFZfW6e-FLr&index=8&ab_channel=IAmTimCorey
+
+quick read if you wish https://en.wikipedia.org/wiki/Mediator_pattern
+
+// I left notes in the classes
+used mediator in controller, it is smart to take requests and pass them to the correct handlers
+
+
+
+--> note: the smaller your application, the less you worry about patterns and stuff. the bigger your application is the mroe you 
+want patterns to be involved in order to balance things out and make use of that complexity and benefit of patterns so you can 
+easily manage bigger applications. the bigger the size the more you want pattern involvement
+
+this application is comparetively small but the goal of tutorial was to show how stuff are working
+===> Patterns covered: 
+-- CQRS: command query responsibiltiy segregation. Idea is simple. We have normal CRUD commands, instead of having all CRUD together, 
+we will segment them out into 2 pieces. R in one piece and CUD in another piece. This is useful as we can scale each side on its 
+own. However, this introduces some complexity as we are splitting data access into two parts. One part which is adding data, and the ohter
+is reading data. Big advantage: is independent scale of either parts( R / CUD).
+
+-- Mediator pattern: used when I got a front end application that is talking to business logic, like backend that talks to DB in its turn
+(this is simple way of application buildings frontend -> business logic -> persistence layer) there is coupling introduced here which can 
+be helped with interfaces, however can interfaces alone help you out as your app scales up. As it grows, Dependency injection gets exhausted
+interms of what you need to bring in and how many classes depend on other classes that depend on some other classes. 
+instead of having direct dependency from A ---> B. we can have A ----> mediator -----> B. A asks for somethign and mediator satisfies it.
+so we got one call from A and mediator is a handler that satisfies it. this is 1:1 relation ship in this example. If I got a new service/clss
+dpeneds on B, that can be directed through mediator as well, which will get B handler.
+instead of having many dpendencies, we just can have mediator help us cut that huge number down
+
+We will use Mediatr nuget package. using blazor here for simplicity
+see how we have separate files for writes, queries, and handlers to engage CQRS
+
+for the web project we installed MediatR with the dependency injection extenstion
+
+
+we created a new web api project: called DemoAPi: and check how simple it is was to use mediator there. same business logic was still 
+in demo library, we just hooked in mediator in demo api and we executed

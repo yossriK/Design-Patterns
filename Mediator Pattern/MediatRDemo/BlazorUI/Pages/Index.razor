@@ -1,0 +1,24 @@
+﻿@page "/"
+@inject MediatR.IMediator _mediator
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<ul>
+    @foreach (var p in people)
+            {
+                <li>@p.FirstName @p.LastName</li>
+            }
+</ul>
+
+@code {      
+    List<PersonModel> people;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        // typically query would have like stuff I asked for it, liek a request coming from other service
+        // all we have to do is call mediator and it will handle routing to stuff
+        people = await _mediator.Send(new GetPersonListQuery());
+    }
+}
