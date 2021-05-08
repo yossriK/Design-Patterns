@@ -1,0 +1,33 @@
+we are using autofac for our dependency injection setup. Dependency injection is how I get dependency inversion in action
+The principle behind this is "Dependency Inversion principle" from the SOLID principle
+
+I followed a tutorial by Tim Corey for this https://www.youtube.com/watch?v=mCUNrRtVVWY&t=49s
+
+key notes: 
+	- our business logic classes would be abstracted( i.e. give them interfaces)
+	and in constructors you would recieve classes with the signature of that interface
+
+	- we can create a factory to register the interface to concrete classes, but for this
+	tutorial as we want to use Autofac, you can download it using the nuget packages, Autofac 
+	is simple to use.
+
+	- you can start wiring autofac in your main function, or once applicaiton starts as 
+	we want to wire container to hold our modules..
+	to be clean and easy to understand, have a separate class to wire your container, like ContainerConfig.cs
+
+	- static classes wont have a constructor 
+
+
+WHY
+	this allows to test application in ways we never could
+	maybe I have dataaccess service, and in test that would actually write to database, but this 
+	way I can inject a mock service to what ever I am testing
+
+	Also I can change the concrete implementaiton of a certain interface without having to change
+	other stuff in my code. Like the change between BetterBusinessLogic and BusinessLogic
+
+	makes our system disconnected and easier to bring classes in. Like in the constructroe(just like I did with typescript and angular)
+
+
+
+Working with MVC... autofac will be wired a bit differntly, more tweeks and stuff
