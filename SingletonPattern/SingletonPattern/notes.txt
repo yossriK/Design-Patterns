@@ -1,0 +1,48 @@
+﻿The Singleton Pattern ensures a class has only one
+instance, and provides a global point of access to it.
+
+- What’s really going on here? We’re taking a class and letting it manage a
+single instance of itself. We’re also preventing any other class from creating a
+new instance on its own. To get an instance, you’ve got to go through the class
+itself.
+- We’re also providing a global access point to the instance: whenever you
+need an instance, just query the class and it will hand you back the single
+instance. As you’ve seen, we can implement this so that the Singleton is created
+in a lazy manner, which is especially important for resource intensive objects.
+
+
+you might face torubles with 2 threads accessing the same instance of the signleton right, where it might be double created, 
+so we gotta make sure our instantiation is synchronous where other thread should wait its turn before it enters the method(thats for java, C# would have differnet way to make the method sync)
+however forcing it to by synchronized might be perforamcne inefficient. you can create a new instance of the singleton once the class is created, thus we ensure its thread safe
+and we can jsut return it later right,
+
+The Singleton Pattern ensures
+you have at most one instance
+of a class in your application.
+ß The Singleton Pattern also
+provides a global access point
+to that instance.
+ß Java’s implementation of the
+Singleton Pattern makes use
+of a private constructor, a static
+method combined with a static
+variable.
+ß Examine your performance
+and resource constraints and
+carefully choose an appropriate
+Singleton implementation for
+multithreaded applications
+(and we should consider all
+applications multithreaded!).
+
+Synchronize the getInstance() method:
+	A straightforward technique that is guaranteed to work. We don’t seem to have any
+	performance concerns with the chocolate boiler, so this would be a good choice.
+Use eager instantiation:(static instantiation in the beginning of the class)
+
+	We are always going to instantiate the chocolate boiler in our code, so statically inializing the
+	instance would cause no concerns. This solution would work as well as the synchronized method,
+	although perhaps be less obvious to a developer familar with the standard pattern.
+
+Double checked locking: (this is the best though, ensures thread safety and helps performance)
+	Given we have no performance concerns, double-checked locking seems like overkill.
